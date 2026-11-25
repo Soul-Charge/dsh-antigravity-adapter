@@ -112,12 +112,12 @@ dsh-antigravity-adapter/
 
 ## 4. 开工前必跑的实机微探针（A1–A4）
 
-> **当前环境状态（2026-11-25 实测）**：本机尚未安装 `agy` CLI（`Get-Command agy` 与 `$env:LOCALAPPDATA\agy\bin\agy.exe` 均为空）。
+> **实机核查状态（2026-11-25 已完成，详见 [docs/PROBES.md](PROBES.md)）**：已安装 `agy` CLI `v1.5.16`（`%LOCALAPPDATA%\agy\bin\agy.exe`），A1–A4 全部跑通并固化至实现。
 
 接手开发的新会话**开工写代码前**必须按顺序完成以下 4 项探针，并把结果记录到本仓库 `docs/PROBES.md`：
 
 1. **安装与鉴权确认**：
-   * 提示用户在终端安装官方 CLI：`irm https://antigravity.google/install.ps1 | iex`（必要时将 `$env:LOCALAPPDATA\agy\bin` 加入用户 PATH），然后运行 `agy` 完成 Google 账号登录。
+   * 提示用户在终端安装官方 CLI：`irm https://antigravity.google/cli/install.ps1 | iex`（必要时将 `$env:LOCALAPPDATA\agy\bin` 加入用户 PATH），然后运行 `agy` 完成 Google 账号登录。
 2. **A1 · 精确 CLI Flag 核查**：
    * 运行 `agy --version` 与 `agy --help`；
    * 核实并固化精确参数名：非交互打印、输出格式、JSON Schema、续聊 ID、模型选择、推理强度、审批/只读模式、是否支持从 `stdin` 读长 prompt。

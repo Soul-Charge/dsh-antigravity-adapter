@@ -2,12 +2,28 @@
 
 DSH 插件：通过 **Antigravity CLI（`agy` Headless，方案 A）** 将 DSH 的任务请求派发至 Google Antigravity 开启持久化会话（支持结构化执行拿回结果，以及向 Antigravity 交棒供人工接管），并作为可热插拔外部后端接入 [dsh-tiered-workflow](https://github.com/Soul-Charge/dsh-tiered-workflow)。
 
-> 当前状态：**设计定稿期（仅文档，尚未编码）** · 技术路线：**方案 A（`agy` CLI Headless）**
+> 当前状态：**v0.2.0 已实现（M1 单测 + M2 Cordis 契约 + M3 真机 `agy` CLI 联调通过；待按需装入 DSH `web` profile）** · 技术路线：**方案 A（`agy` CLI Headless `stream-json`）**
 
 ## 文档索引
 
-* [docs/DESIGN.md](docs/DESIGN.md) — 完整架构设计、方案 A（`agy` CLI）封装协议、Windows 避坑、A1–A4 开工前实测探针与分阶段验收标准
+* [docs/DESIGN.md](docs/DESIGN.md) — 完整架构设计、方案 A（`agy` CLI）封装协议、Windows 避坑与分阶段验收标准
 * [docs/CONTRACT.md](docs/CONTRACT.md) — 与主框架 `dsh-tiered-workflow` 对齐的 `ExternalBackendAdapter`（v1）接口契约（双仓同步标准）
+* [docs/PROBES.md](docs/PROBES.md) — `agy` CLI `v1.5.16` 实机 A1–A4 微探针记录（flag、NDJSON、续聊 token 增量口径、进程级只读 `deny` 与 A4 可见性）
+
+## 本地验证
+
+```powershell
+# 1. 首次在本地建立 @deepseek-ai/schemastery 目录联接（指向本机 DSH 宿主）
+New-Item -ItemType Directory -Force './node_modules/@deepseek-ai'
+New-Item -ItemType Junction -Path './node_modules/@deepseek-ai/schemastery' `
+  -Target 'C:/Program Files/nvm/v24.18.1/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/schemastery'
+
+# 2. 运行离线单测 + fake-agy E2E + Cordis 集成测试
+npm test
+
+# 3. 运行含真实 agy CLI 的端到端测试
+npm run test:real
+```
 
 ## 定位与职责边界
 

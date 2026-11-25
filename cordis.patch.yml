@@ -1,0 +1,16 @@
+# dsh-antigravity-adapter bundle layer: mount the Antigravity CLI external backend adapter.
+#
+# Soft-depends on `tieredWorkflow` (provided by dsh-tiered-workflow); safe to load
+# even when dsh-tiered-workflow is absent.
+- insert:
+    - id: antigravity-adapter
+      name: dsh-antigravity-adapter
+      config:
+        agyPath: agy
+        defaultTimeoutMs: 300000
+        defaultApprovalMode: ''
+        readonlyApprovalMode: ''
+        defaultModel: ''
+        disableSlashCommands: true
+        registerStandaloneTool: false
+        debugLog: ''
